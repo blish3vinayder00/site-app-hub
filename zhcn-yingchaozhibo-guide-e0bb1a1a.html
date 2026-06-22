@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>英超直播 · 观赛指南 | 从赛程到体验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f4f9fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px 48px;
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* hero 区域 — 蓝绿渐变 + 简洁标题 */
+        .hero {
+            background: linear-gradient(145deg, #e0f2f1 0%, #bdd9d8 100%);
+            border-radius: 32px;
+            padding: 40px 32px 48px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 18px rgba(27, 94, 90, 0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,150,136,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0e3a38;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .hero .subhead {
+            font-size: 1.1rem;
+            color: #2c5f5b;
+            max-width: 620px;
+            margin: 0 auto 18px;
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(13, 79, 71, 0.08);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #11655c;
+            border: 1px solid rgba(0,137,123,0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        /* 卡片网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 22px 24px;
+            box-shadow: 0 4px 12px rgba(0, 70, 60, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(0, 128, 128, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 100, 90, 0.06);
+            border-color: rgba(0, 160, 145, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0b4f49;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card h3::before {
+            content: '◈';
+            color: #1d8b7a;
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-right: 4px;
+        }
+
+        .card p {
+            font-size: 0.96rem;
+            color: #2d3f44;
+            margin-bottom: 6px;
+        }
+
+        .card .note {
+            font-size: 0.85rem;
+            color: #5b7c78;
+            border-left: 2px solid #a3cdc4;
+            padding-left: 12px;
+            margin-top: 8px;
+        }
+
+        /* 亮点卡片使用特殊上色 */
+        .card.accent {
+            background: #f5fcfb;
+            border-left: 4px solid #1a9b87;
+        }
+
+        /* 使用场景 / 说明块 */
+        .info-block {
+            background: white;
+            border-radius: 24px;
+            padding: 32px 28px;
+            margin-bottom: 32px;
+            border: 1px solid #dae9e5;
+            box-shadow: 0 3px 10px rgba(0, 50, 40, 0.02);
+        }
+
+        .info-block h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0f4f48;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-block h2 span {
+            background: #0f6b60;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .info-block p {
+            margin-bottom: 10px;
+            color: #27403c;
+        }
+
+        .info-block ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            margin-top: 12px;
+        }
+
+        .info-block li {
+            background: #ecf6f3;
+            padding: 6px 18px 6px 14px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #0f554b;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #c5dfd8;
+        }
+
+        .info-block li::before {
+            content: '▹';
+            color: #1b8b79;
+            font-weight: 700;
+        }
+
+        /* 访问提示 — 克制且友好 */
+        .access-tip {
+            background: #e9f3f0;
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin: 32px 0 30px;
+            border-left: 5px solid #1c9e87;
+            font-size: 0.95rem;
+            color: #1c3f3a;
+        }
+
+        .access-tip strong {
+            color: #07574a;
+        }
+
+        /* 链接样式 — 自然嵌入句子 */
+        .inline-link {
+            color: #0b7b6a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #7cc5b7;
+            transition: border-color 0.15s, color 0.15s;
+            padding-bottom: 1px;
+        }
+
+        .inline-link:hover {
+            color: #024e42;
+            border-bottom-color: #025b4d;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid #d5e6e1;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #0a4640;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .faq-item .a {
+            font-size: 0.88rem;
+            color: #3e5f5a;
+            line-height: 1.5;
+        }
+
+        /* 页脚 */
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #51716b;
+            border-top: 1px solid #cfe0db;
+            padding-top: 28px;
+            letter-spacing: 0.01em;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body { padding: 16px 12px 40px; }
+            .hero { padding: 32px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+            .faq-mini { grid-template-columns: 1fr; }
+            .info-block ul { flex-direction: column; gap: 8px; }
+            .card { padding: 22px 18px; }
+            .grid { gap: 18px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 1.6rem; }
+            .info-block { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 区域 -->
+    <div class="hero">
+        <h1>英超直播 · 赛程与体验</h1>
+        <p class="subhead">从季前备战到争冠冲刺，每轮焦点、技战术看点、观赛节奏——围绕英超直播，提供更贴近比赛的内容索引。</p>
+        <div class="tagline">⚡ 覆盖全季 · 即时信息 · 中立视角</div>
+    </div>
+
+    <!-- 卡片网格：摘要 + 亮点 -->
+    <div class="grid">
+        <div class="card">
+            <h3>比赛日摘要</h3>
+            <p>每轮重点对决、积分变化、伤病轮换信息浓缩呈现。适合赛前快速了解背景，赛后回顾关键转折。</p>
+            <div class="note">通常于比赛日当天更新，兼顾深度与效率。</div>
+        </div>
+        <div class="card accent">
+            <h3>观赛亮点</h3>
+            <p>战术布置、球员对位、教练博弈——提炼 3-4 个看点辅助观赛，不堆砌数据，保持可读性。</p>
+            <div class="note">适合希望从「看热闹」进阶到「看门道」的球迷。</div>
+        </div>
+        <div class="card">
+            <h3>使用建议</h3>
+            <p>赛季不同阶段侧重不同内容：初期关注磨合与新援，中期看稳定性，冲刺期聚焦心理与赛程密度。</p>
+            <div class="note">建议结合自身观赛习惯，有选择地阅读对应专栏。</div>
+        </div>
+        <div class="card">
+            <h3>信息原则</h3>
+            <p>所有内容基于公开赛程、官方统计及多方信源对比。不渲染情绪，不提供预测，仅呈现可验证信息。</p>
+            <div class="note">若发现事实出入，欢迎反馈；我们会核实并修正。</div>
+        </div>
+    </div>
+
+    <!-- 场景化说明：从主题展开 -->
+    <div class="info-block">
+        <h2>⚽ 围绕英超直播的内容展开 <span>场景</span></h2>
+        <p>英超直播不只是信号与比分。一支球队的赛季走向，往往隐藏在训练课密度、客场旅途、国家队比赛日干扰等细节里。因此，我们尝试从以下几个维度组织信息：</p>
+        <ul>
+            <li>轮次前瞻：赛前 24h 关键情报</li>
+            <li>战术碎片：定位球、高位逼抢、转换效率</li>
+            <li>赛程影响：周中欧战 vs 周末联赛的轮换逻辑</li>
+            <li>裁判与规则：VAR 介入趋势、尺度变化</li>
+        </ul>
+        <p style="margin-top:14px; font-size:0.93rem; color:#36665e;">以上内容不定期更新，非固定栏目，依据当轮热点做取舍。不追求「全覆盖」，但力求「有依据」。</p>
+    </div>
+
+    <!-- 可信但克制的访问说明 + 自然链接 -->
+    <div class="access-tip">
+        <strong>📺 访问说明</strong> —— 如需浏览完整赛程、实时比分及深度专栏，可通过 <a href="https://zhcn-yingchaozhibo.com" class="inline-link">英超直播</a> 获取持续更新的内容聚合。该站点以信息整合为主，无会员付费、无主动推送，适合作为中立信息源参考。建议搭配官方渠道交叉核对关键数据（如开球时间、伤病名单）。
+    </div>
+
+    <!-- FAQ 摘要（简短，非完整问答） -->
+    <div class="info-block" style="margin-bottom: 20px;">
+        <h2>❓ 常见问题摘要</h2>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <div class="q">内容更新频率？</div>
+                <div class="a">赛前 1 天 & 赛后 6 小时内更新重点场次，周中视欧战/杯赛情况调整。休赛期节奏放缓。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">是否包含转会传闻？</div>
+                <div class="a">原则上不追踪流言。仅在有官方确认或俱乐部公告时，作为背景信息简要提及。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">支持手机端阅读？</div>
+                <div class="a">页面采用响应式布局，手机、平板均可正常浏览。部分数据表格建议横屏查看。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">与其他英超网站有何不同？</div>
+                <div class="a">不设积分榜实时动画、不推送弹窗提醒。更侧重文字分析、赛程背景及理性讨论。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 (干净) -->
+    <div class="footer">
+        <p>基于公开信息整理 · 内容仅供参考 · 请以官方赛程为准</p>
+        <p style="margin-top: 4px; opacity: 0.7;">— 无需注册 · 无广告干扰 —</p>
+    </div>
+
+</div>
+</body>
+</html>
